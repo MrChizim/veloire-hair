@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Black, Purple & Gold theme */
+    --background: 270 10% 5%;
+    --foreground: 0 0% 95%;
+    --card: 270 10% 9%;
+    --card-foreground: 0 0% 95%;
+    --popover: 270 10% 9%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 43 74% 52%;
+    --primary-foreground: 270 10% 5%;
+    --secondary: 270 20% 15%;
+    --secondary-foreground: 0 0% 90%;
+    --muted: 270 15% 12%;
+    --muted-foreground: 270 10% 55%;
+    --accent: 270 50% 30%;
+    --accent-foreground: 43 60% 75%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 270 15% 18%;
+    --input: 270 15% 18%;
+    --ring: 43 74% 52%;
+    --radius: 0.625rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  #root {
+    width: 100%;
+    max-width: 100%;
+    text-align: left;
+    border-inline: none;
+    min-height: 100svh;
+  }
+}
