@@ -2,6 +2,14 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { Menu, X, ArrowUp, Instagram, Phone, Mail } from "lucide-react";
+
+function TikTokIcon({ size = 13 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/>
+    </svg>
+  );
+}
 import { motion, AnimatePresence } from "framer-motion";
 
 const GOLD_FILTER = "brightness(0) saturate(100%) invert(68%) sepia(56%) saturate(500%) hue-rotate(5deg) brightness(95%)";
@@ -17,7 +25,7 @@ const footerServices = [
 
 const socialLinks = [
   { label: "@veloire_hair", href: "https://instagram.com/veloire_hair", icon: "IG" },
-  { label: "@veloire_hair", href: "https://tiktok.com/@veloire_hair", icon: "TK" },
+  { label: "@veloire_hair", href: "https://tiktok.com/@veloire_hair", icon: "TT" },
 ];
 
 export default function Layout({ children, currentPageName }) {
@@ -174,7 +182,7 @@ export default function Layout({ children, currentPageName }) {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 bg-white/6 hover:bg-primary/15 border border-white/10 hover:border-primary/30 rounded-full px-4 py-2 text-xs font-medium text-white/60 hover:text-primary transition-all duration-300"
                 >
-                  TK @veloire_hair
+                  <TikTokIcon size={13} /> @veloire_hair
                 </a>
               </div>
             </div>

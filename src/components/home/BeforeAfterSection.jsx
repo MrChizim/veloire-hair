@@ -1,7 +1,8 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, X, ChevronLeft, ChevronRight } from "lucide-react";
 
 const transformations = [
   {
@@ -27,8 +28,15 @@ const transformations = [
 ];
 
 export default function BeforeAfterSection() {
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+
+  const openLightbox = (i) => setLightboxIndex(i);
+  const closeLightbox = () => setLightboxIndex(null);
+  const prev = () => setLightboxIndex((i) => (i - 1 + transformations.length) % transformations.length);
+  const next = () => setLightboxIndex((i) => (i + 1) % transformations.length);
+
   return (
-    <section className="py-24 md:py-32 overflow-hidden relative bg-background">
+    <section className="py-20 md:py-28 overflow-hidden relative bg-background">
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Header */}
         <motion.div
@@ -36,7 +44,7 @@ export default function BeforeAfterSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-14"
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10"
         >
           <div>
             <p className="text-primary text-sm tracking-[0.25em] uppercase mb-3 font-body">Transformations</p>
@@ -50,7 +58,7 @@ export default function BeforeAfterSection() {
         </motion.div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {transformations.map((item, i) => (
             <motion.div
               key={item.title}
@@ -58,28 +66,29 @@ export default function BeforeAfterSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group relative bg-card border border-border hover:border-primary/30 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-purple-900/20"
+              className="group relative bg-card border border-border hover:border-primary/30 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg cursor-pointer"
+              onClick={() => openLightbox(i)}
             >
-              {/* The collage image is already before (top) / after (bottom) in one shot */}
-              <div className="relative overflow-hidden aspect-[4/5]">
+              <div className="relative overflow-hidden aspect-[3/4]">
                 <img
                   src={item.image}
                   alt={item.title}
                   loading="lazy"
-                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                {/* Before label top-left, After label bottom-left */}
-                <span className="absolute top-3 left-3 bg-black/60 backdrop-blur-sm text-white/80 text-[10px] font-medium px-2.5 py-1 rounded-full border border-white/15 pointer-events-none">Before</span>
-                <span className="absolute bottom-3 left-3 bg-primary/85 backdrop-blur-sm text-primary-foreground text-[10px] font-medium px-2.5 py-1 rounded-full pointer-events-none">After</span>
+                <span className="absolute top-2 left-2 bg-black/60 backdrop-blur-sm text-white/80 text-[9px] font-medium px-2 py-0.5 rounded-full border border-white/15">Before</span>
+                <span className="absolute bottom-2 left-2 bg-primary/85 backdrop-blur-sm text-primary-foreground text-[9px] font-medium px-2 py-0.5 rounded-full">After</span>
+                {/* Expand hint */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="bg-black/50 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-full border border-white/20">Tap to expand</span>
+                </div>
               </div>
-
-              {/* Card footer */}
-              <div className="p-4">
-                <h3 className="font-heading text-base font-semibold text-foreground mb-2">{item.title}</h3>
-                <div className="flex flex-wrap gap-1.5">
+              <div className="p-3">
+                <h3 className="font-heading text-sm font-semibold text-foreground mb-1.5">{item.title}</h3>
+                <div className="flex flex-wrap gap-1">
                   {item.services.map((s) => (
-                    <span key={s} className="text-[11px] bg-card border border-border text-muted-foreground px-2 py-0.5 rounded-full">
+                    <span key={s} className="text-[10px] bg-card border border-border text-muted-foreground px-1.5 py-0.5 rounded-full">
                       {s}
                     </span>
                   ))}
@@ -94,7 +103,7 @@ export default function BeforeAfterSection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center mt-12"
+          className="text-center mt-10"
         >
           <Link
             to={`${createPageUrl("BookAppointment")}?service=r1`}
@@ -104,6 +113,70 @@ export default function BeforeAfterSection() {
           </Link>
         </motion.div>
       </div>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightboxIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+            onClick={closeLightbox}
+          >
+            {/* Close */}
+            <button
+              onClick={closeLightbox}
+              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors z-10"
+            >
+              <X size={18} />
+            </button>
+
+            {/* Prev */}
+            <button
+              onClick={(e) => { e.stopPropagation(); prev(); }}
+              className="absolute left-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors z-10"
+            >
+              <ChevronLeft size={20} />
+            </button>
+
+            {/* Image */}
+            <motion.div
+              key={lightboxIndex}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="relative max-h-[90vh] max-w-sm w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={transformations[lightboxIndex].image}
+                alt={transformations[lightboxIndex].title}
+                className="w-full h-full object-contain rounded-xl"
+              />
+              <div className="absolute top-3 left-3 flex gap-2">
+                <span className="bg-black/60 backdrop-blur-sm text-white/80 text-xs px-2.5 py-1 rounded-full border border-white/15">Before (top)</span>
+                <span className="bg-primary/85 backdrop-blur-sm text-primary-foreground text-xs px-2.5 py-1 rounded-full">After (bottom)</span>
+              </div>
+              <p className="text-white/70 text-center text-sm mt-3">{transformations[lightboxIndex].title}</p>
+            </motion.div>
+
+            {/* Next */}
+            <button
+              onClick={(e) => { e.stopPropagation(); next(); }}
+              className="absolute right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors z-10"
+            >
+              <ChevronRight size={20} />
+            </button>
+
+            {/* Counter */}
+            <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/40 text-xs">
+              {lightboxIndex + 1} / {transformations.length}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
