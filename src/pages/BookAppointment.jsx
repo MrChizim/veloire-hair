@@ -310,16 +310,16 @@ function ConfirmationScreen({ formData, chosenService, selectedDate, selectedTim
         </div>
 
         {/* Next steps */}
-        <div className="bg-purple-950/40 border border-purple-800/40 rounded-xl p-5 mb-6 text-left">
-          <p className="text-sm font-semibold text-purple-300 mb-3">What happens next?</p>
+        <div className="bg-card border border-border rounded-xl p-5 mb-6 text-left">
+          <p className="text-sm font-semibold text-foreground mb-3">What happens next?</p>
           <ol className="space-y-3">
             {[
               { n: "1", text: "Copy the message below." },
               { n: "2", text: "Open Instagram and DM @veloire_hair — paste the message." },
               { n: "3", text: "Véloire will confirm your booking via DM." },
             ].map(({ n, text }) => (
-              <li key={n} className="flex gap-3 text-sm text-purple-200/80">
-                <span className="flex-shrink-0 w-5 h-5 bg-purple-700/60 text-purple-200 rounded-full flex items-center justify-center text-xs font-bold">{n}</span>
+              <li key={n} className="flex gap-3 text-sm text-muted-foreground">
+                <span className="flex-shrink-0 w-5 h-5 bg-primary/15 text-primary border border-primary/25 rounded-full flex items-center justify-center text-xs font-bold">{n}</span>
                 <span>{text}</span>
               </li>
             ))}

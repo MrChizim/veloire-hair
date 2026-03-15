@@ -1,44 +1,92 @@
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { motion } from "framer-motion";
-import { Scissors, RotateCcw, Sparkles, ArrowRight } from "lucide-react";
+import { ArrowRight, Scissors, RotateCcw, Sparkles, Palette, Layers, Wand2, Repeat2, Wrench } from "lucide-react";
 
-const highlights = [
-  { icon: Sparkles, title: "Wig Installs", description: "Glueless, lace front, HD lace and full lace installs — done to perfection for a natural, undetectable look.", image: "/images/service1.jpg" },
-  { icon: RotateCcw, title: "Wig Revamps", description: "Breathe new life into old wigs. Deep conditioning, restyling, bleaching knots, re-plucking and more.", image: "/images/service2.jpg" },
-  { icon: Scissors, title: "Custom Wigs", description: "Hand-crafted to your exact measurements, density, texture and style. Truly one of a kind.", image: "/images/service3.jpg" },
+const services = [
+  { icon: Layers,    title: "100% Human Hair",   description: "Premium human hair wigs for a natural, undetectable look.", image: "/images/portfolio12.jpg" },
+  { icon: Wand2,     title: "Hair Blends",        description: "Blended textures for maximum volume and movement.",           image: "/images/portfolio2.jpg" },
+  { icon: Scissors,  title: "Closures",           description: "Realistic scalp illusion with a flawless parting.",           image: "/images/portfolio3.jpg" },
+  { icon: Sparkles,  title: "Frontals",           description: "Full frontal wigs — HD or regular lace, built to order.",     image: "/images/portfolio11.jpg" },
+  { icon: RotateCcw, title: "Revamps",            description: "Shampoo, deep condition, steam treatment & restyle.",         image: "/images/portfolio4.jpg" },
+  { icon: Palette,   title: "Styling",            description: "Cuts, curls, blowouts — your wig, your way.",                image: "/images/portfolio5.jpg" },
+  { icon: Wand2,     title: "Customisation",      description: "Colour, highlights, ombre — totally unique to you.",          image: "/images/portfolio6.jpg" },
+  { icon: Repeat2,   title: "Lace Replacement",   description: "Fresh lace to give your favourite wig a new lease of life.",  image: "/images/portfolio9.jpg" },
 ];
 
 export default function ServicesPreview() {
   return (
-    <section className="py-24 md:py-32 bg-background">
+    <section className="py-24 md:py-32 bg-background overflow-hidden relative">
       <div className="max-w-6xl mx-auto px-6">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-          <p className="text-primary text-sm tracking-[0.25em] uppercase mb-3 font-body">What We Do</p>
-          <h2 className="font-heading text-4xl md:text-5xl font-semibold text-foreground">
-            Our <span className="italic font-light">Specialities</span>
-          </h2>
+
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12"
+        >
+          <div>
+            <p className="text-primary text-sm tracking-[0.25em] uppercase mb-3 font-body">What We Do</p>
+            <h2 className="font-heading text-4xl md:text-5xl font-semibold text-foreground">
+              Our <span className="italic font-light">Services</span>
+            </h2>
+          </div>
+          <p className="text-muted-foreground max-w-xs leading-relaxed text-sm md:text-base">
+            From bespoke builds to full restorations — every wig gets the royal treatment.
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {highlights.map((item, index) => (
-            <motion.div key={item.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.15 }} className="group">
-              <div className="relative overflow-hidden rounded-2xl mb-6 aspect-[4/5]">
-                <img src={item.image} alt={item.title} loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                <div className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-sm p-3 rounded-xl border border-primary/20">
-                  <item.icon size={20} className="text-primary" />
+        {/* Uniform 2-col mobile / 4-col desktop grid, all square */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {services.map((service, index) => (
+            <motion.div
+              key={service.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: index * 0.06 }}
+              className="group relative overflow-hidden rounded-xl bg-card aspect-square"
+            >
+              <img
+                src={service.image}
+                alt={service.title}
+                loading="lazy"
+                className="w-full h-full object-cover object-[center_65%] transition-transform duration-700 group-hover:scale-[1.07]"
+              />
+              {/* Permanent gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+              {/* Content */}
+              <div className="absolute inset-0 p-3 md:p-4 flex flex-col justify-end">
+                <div className="w-7 h-7 md:w-8 md:h-8 bg-primary/20 backdrop-blur-sm border border-primary/30 rounded-lg flex items-center justify-center mb-2">
+                  <service.icon size={14} className="text-primary" />
                 </div>
+                <h3 className="font-heading text-sm md:text-base font-semibold text-white leading-tight">
+                  {service.title}
+                </h3>
+                {/* Description — only visible on hover on desktop, always hidden on mobile to keep clean */}
+                <p className="hidden md:block text-white/60 text-xs leading-relaxed mt-1 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                  {service.description}
+                </p>
               </div>
-              <h3 className="font-heading text-2xl font-semibold text-foreground mb-2">{item.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
             </motion.div>
           ))}
         </div>
 
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-14">
-          <Link to={createPageUrl("Services")} className="inline-flex items-center gap-2 text-primary text-sm font-medium tracking-wide hover:gap-3 transition-all duration-300">
-            View All Services <ArrowRight size={16} />
+        {/* CTA link */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-center mt-10"
+        >
+          <Link
+            to={createPageUrl("Services")}
+            className="inline-flex items-center gap-2 text-primary text-sm font-medium tracking-wide hover:gap-3 transition-all duration-300 group"
+          >
+            View Full Price List <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </motion.div>
       </div>

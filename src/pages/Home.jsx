@@ -1,5 +1,6 @@
 import HeroSection from "@/components/home/HeroSection";
 import ServicesPreview from "@/components/home/ServicesPreview";
+import BeforeAfterSection from "@/components/home/BeforeAfterSection";
 import AboutSection from "@/components/home/AboutSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import InstagramSection from "@/components/home/InstagramSection";
@@ -10,6 +11,7 @@ export default function Home() {
     <>
       <HeroSection />
       <ServicesPreview />
+      <BeforeAfterSection />
       <AboutSection />
       <TestimonialsSection />
       <InstagramSection />
