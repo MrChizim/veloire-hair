@@ -336,7 +336,7 @@ function ConfirmationScreen({ formData, chosenService, selectedDate, selectedTim
           Confirm on WhatsApp
         </a>
         <a
-          href={`mailto:${formData.email}?subject=${encodeURIComponent("Your Véloire Hair Booking")}&body=${encodeURIComponent(
+          href={`mailto:${formData.email}?cc=veloire.info@gmail.com&subject=${encodeURIComponent("Your Véloire Hair Booking")}&body=${encodeURIComponent(
             `Hi ${formData.client_name},\n\nYour booking request has been submitted. Here's your summary:\n\nService: ${chosenService?.name || ""}\nDate: ${format(selectedDate, "EEEE, d MMMM yyyy")}\nTime: ${selectedTime}\n${chosenService?.price > 0 ? `Price: £${chosenService.price}\n` : ""}${formData.notes ? `Notes: ${formData.notes}\n` : ""}\nVéloire Hair will confirm your appointment via WhatsApp shortly.\n\nThank you!\nVéloire Hair`
           )}`}
           className="inline-flex items-center justify-center gap-2 bg-card border border-border hover:border-primary/30 text-foreground px-8 py-3.5 rounded-full text-sm font-medium transition-colors w-full mb-3"
