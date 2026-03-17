@@ -1,4 +1,5 @@
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { entities } from "@/api/entities";
 import { FALLBACK_SERVICES } from "./Services";
 import { useQuery, useMutation } from "@tanstack/react-query";
@@ -12,6 +13,26 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CheckCircle, Clock, ArrowLeft, CalendarDays, RefreshCw } from "lucide-react";
 import { format, addDays, isSunday, isMonday, isBefore, startOfToday, parseISO } from "date-fns";
+
+const EMAILJS_SERVICE = "service_wb2luhb";
+const EMAILJS_TEMPLATE = "template_7px4fcr";
+const EMAILJS_KEY = "kVah_Ts-0oKsp7p9A";
+const GF_EMAIL = "veloire.info@gmail.com";
+
+async function sendConfirmationEmails({ client_name, email, service_name, date, time, price, notes }) {
+  const params = {
+    client_name,
+    service_name,
+    date,
+    time,
+    price: price > 0 ? `£${price}` : "Quote / Price on request",
+    notes: notes || "None",
+  };
+  // Send to client
+  await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, { ...params, to_email: email, client_email: email }, EMAILJS_KEY);
+  // Send to your gf
+  await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, { ...params, to_email: GF_EMAIL, client_email: email }, EMAILJS_KEY);
+}
 
 const TIME_SLOTS = [
   "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
@@ -63,7 +84,16 @@ export default function BookAppointment() {
 
   const createBooking = useMutation({
     mutationFn: (data) => entities.Booking.create(data),
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
+      sendConfirmationEmails({
+        client_name: variables.client_name,
+        email: variables.email,
+        service_name: variables.service_name,
+        date: variables.date,
+        time: variables.time,
+        price: chosenService?.price || 0,
+        notes: variables.notes,
+      }).catch(() => {}); // silent fail — booking is saved regardless
       setSubmitted(true);
     },
   });
