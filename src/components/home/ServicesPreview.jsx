@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { motion } from "framer-motion";
-import { ArrowRight, Scissors, RotateCcw, Sparkles, Palette, Layers, Wand2, Repeat2, Wrench } from "lucide-react";
+import { ArrowRight, Scissors, RotateCcw, Sparkles, Palette, Layers, Wand2, Repeat2 } from "lucide-react";
 
 const services = [
   { icon: Layers,    title: "100% Human Hair",   description: "Premium human hair wigs for a natural, undetectable look.", image: "/images/portfolio12.jpg" },

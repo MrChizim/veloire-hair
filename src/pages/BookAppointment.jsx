@@ -10,9 +10,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CheckCircle, Clock, ArrowLeft, CalendarDays, RefreshCw } from "lucide-react";
-import { format, addDays, isSunday, isMonday, isBefore, startOfToday, parseISO } from "date-fns";
+import { format, addDays, isSunday, isMonday, isBefore, startOfToday } from "date-fns";
 
 const EMAILJS_SERVICE = "service_wb2luhb";
 const EMAILJS_TEMPLATE = "template_7px4fcr";
