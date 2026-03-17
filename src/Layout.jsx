@@ -16,7 +16,7 @@ const GOLD_FILTER = "brightness(0) saturate(100%) invert(68%) sepia(56%) saturat
 
 const footerServices = [
   { label: "100% Human Hair Wigs", page: "Services" },
-  { label: "Hair Blends & Closures", page: "Services" },
+  { label: "Closures & Frontals", page: "Services" },
   { label: "Wig Revamps & Styling", page: "Services" },
   { label: "Lace & Frontal Replacement", page: "Services" },
   { label: "Customisation & Repairs", page: "Services" },
@@ -134,7 +134,7 @@ export default function Layout({ children, currentPageName }) {
             "/images/portfolio11.jpg",
             "/images/portfolio4.jpg",
             "/images/portfolio8.jpg",
-            "/images/portfolio6.jpg",
+            "/images/portfolio15.jpg",
           ].map((src, i) => (
             <div key={i} className="relative overflow-hidden">
               <img src={src} alt="" className="w-full h-full object-cover object-[center_65%]" />

@@ -19,7 +19,6 @@ export const FALLBACK_SERVICES = [
   { id: "s4", name: "Wig Band Replacement", description: "Quick elastic band replacement to restore fit and comfort", price: 5, duration: 30, category: "repairs" },
   // Custom builds
   { id: "c1", name: "100% Human Hair Wig", description: "Bespoke human hair wig built to your exact specs — length, density, texture & style", price: 0, duration: 0, category: "custom" },
-  { id: "c2", name: "Hair Blend Wig", description: "Premium blended hair wig for maximum volume and natural movement", price: 0, duration: 0, category: "custom" },
   { id: "c3", name: "Closure Wig", description: "Custom made closure wig with realistic scalp illusion", price: 0, duration: 0, category: "custom" },
   { id: "c4", name: "Frontal Wig", description: "Full frontal wig build — HD or regular lace, customised to you", price: 0, duration: 0, category: "custom" },
   // Other

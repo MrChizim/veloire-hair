@@ -5,26 +5,10 @@ import { createPageUrl } from "@/utils";
 import { ArrowRight, X, ChevronLeft, ChevronRight } from "lucide-react";
 
 const transformations = [
-  {
-    image: "/images/revamp2.jpg",
-    title: "Curly Revamp",
-    services: ["Deep Wash", "Styling", "Plucking"],
-  },
-  {
-    image: "/images/revamp3.jpg",
-    title: "Straight Revamp",
-    services: ["Shampooing", "Deep Conditioning", "Styling"],
-  },
-  {
-    image: "/images/revamp4.jpg",
-    title: "Blonde Bob Trim",
-    services: ["Trimming", "Styling"],
-  },
-  {
-    image: "/images/revamp5.jpg",
-    title: "Highlight Styling",
-    services: ["Styling", "Trimming"],
-  },
+  { image: "/images/revamp2.jpg" },
+  { image: "/images/revamp3.jpg" },
+  { image: "/images/revamp4.jpg" },
+  { image: "/images/revamp5.jpg" },
 ];
 
 export default function BeforeAfterSection() {
@@ -61,7 +45,7 @@ export default function BeforeAfterSection() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {transformations.map((item, i) => (
             <motion.div
-              key={item.title}
+              key={i}
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -72,26 +56,15 @@ export default function BeforeAfterSection() {
               <div className="relative overflow-hidden aspect-[3/4]">
                 <img
                   src={item.image}
-                  alt={item.title}
+                  alt={`Transformation ${i + 1}`}
                   loading="lazy"
-                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                 <span className="absolute top-2 left-2 bg-black/60 backdrop-blur-sm text-white/80 text-[9px] font-medium px-2 py-0.5 rounded-full border border-white/15">Before</span>
                 <span className="absolute bottom-2 left-2 bg-primary/85 backdrop-blur-sm text-primary-foreground text-[9px] font-medium px-2 py-0.5 rounded-full">After</span>
-                {/* Expand hint */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <span className="bg-black/50 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-full border border-white/20">Tap to expand</span>
-                </div>
-              </div>
-              <div className="p-3">
-                <h3 className="font-heading text-sm font-semibold text-foreground mb-1.5">{item.title}</h3>
-                <div className="flex flex-wrap gap-1">
-                  {item.services.map((s) => (
-                    <span key={s} className="text-[10px] bg-card border border-border text-muted-foreground px-1.5 py-0.5 rounded-full">
-                      {s}
-                    </span>
-                  ))}
                 </div>
               </div>
             </motion.div>
@@ -159,7 +132,7 @@ export default function BeforeAfterSection() {
                 <span className="bg-black/60 backdrop-blur-sm text-white/80 text-xs px-2.5 py-1 rounded-full border border-white/15">Before (top)</span>
                 <span className="bg-primary/85 backdrop-blur-sm text-primary-foreground text-xs px-2.5 py-1 rounded-full">After (bottom)</span>
               </div>
-              <p className="text-white/70 text-center text-sm mt-3">{transformations[lightboxIndex].title}</p>
+              <p className="text-white/50 text-center text-xs mt-3">Top: Before · Bottom: After</p>
             </motion.div>
 
             {/* Next */}

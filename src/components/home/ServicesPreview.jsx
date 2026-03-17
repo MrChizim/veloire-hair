@@ -5,9 +5,8 @@ import { ArrowRight, Scissors, RotateCcw, Sparkles, Palette, Layers, Wand2, Repe
 
 const services = [
   { icon: Layers,    title: "100% Human Hair",   description: "Premium human hair wigs for a natural, undetectable look.", image: "/images/portfolio12.jpg" },
-  { icon: Wand2,     title: "Hair Blends",        description: "Blended textures for maximum volume and movement.",           image: "/images/portfolio2.jpg" },
   { icon: Scissors,  title: "Closures",           description: "Realistic scalp illusion with a flawless parting.",           image: "/images/portfolio3.jpg" },
-  { icon: Sparkles,  title: "Frontals",           description: "Full frontal wigs — HD or regular lace, built to order.",     image: "/images/portfolio11.jpg" },
+  { icon: Sparkles,  title: "Frontals",           description: "Full frontal wigs — HD or regular lace, built to order.",     image: "/images/portfolio15.jpg" },
   { icon: RotateCcw, title: "Revamps",            description: "Shampoo, deep condition, steam treatment & restyle.",         image: "/images/portfolio4.jpg" },
   { icon: Palette,   title: "Styling",            description: "Cuts, curls, blowouts — your wig, your way.",                image: "/images/portfolio5.jpg" },
   { icon: Wand2,     title: "Customisation",      description: "Colour, highlights, ombre — totally unique to you.",          image: "/images/portfolio6.jpg" },
